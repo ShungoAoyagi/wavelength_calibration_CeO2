@@ -1,1 +1,8 @@
 /test_dir
+/build
+/dist
+*/__pycache__
+/.venv
+*.pptx
+*.pdf
+*.spec

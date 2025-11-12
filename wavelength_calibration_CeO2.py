@@ -158,5 +158,5 @@ def main():
 
 
 if __name__ == '__main__':
-    calibrator, results = main()
+    main()
 
