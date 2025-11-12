@@ -1,0 +1,8 @@
+first_dimensions_of_array: 981 # number of pixels in the horizontal direction
+second_dimensions_of_array: 1043 # number of pixels in the vertical direction
+size_of_horizontal_pixels: 172 # size of the horizontal pixels in microns
+size_of_vertical_pixels: 172 # size of the vertical pixels in microns
+x_pixel_coordinate_of_direct_beam: 495.2 # x coordinate of the direct beam in pixels (will be calibrated)
+y_pixel_coordinate_of_direct_beam: 521.11 # y coordinate of the direct beam in pixels (will be calibrated)
+rotation_angle_of_tilting_plane: 7.675275 # rotation angle of the tilting plane in degrees
+angle_of_detector_tilt_in_plane: 0.09368178 # angle of the detector tilt in the plane in degrees
