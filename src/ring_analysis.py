@@ -50,8 +50,9 @@ class PowderRingAnalyzer:
         self.ny = config['second_dimensions_of_array']
         self.pixel_size_h = config['size_of_horizontal_pixels'] * 1e-6  # μm -> m
         self.pixel_size_v = config['size_of_vertical_pixels'] * 1e-6  # μm -> m
-        self.beam_center_x = config['x_pixel_coordinate_of_direct_beam']
-        self.beam_center_y = config['y_pixel_coordinate_of_direct_beam']
+        # Initial value
+        self._beam_center_x = config['x_pixel_coordinate_of_direct_beam']
+        self._beam_center_y = config['y_pixel_coordinate_of_direct_beam']
         self.tilt_rotation = config['rotation_angle_of_tilting_plane']
         self.tilt_angle = config['angle_of_detector_tilt_in_plane']
         
@@ -62,8 +63,8 @@ class PowderRingAnalyzer:
         self.geometry_calc = GeometryCalculator(
             self.pixel_size_h, 
             self.pixel_size_v,
-            self.beam_center_x,
-            self.beam_center_y,
+            self._beam_center_x,
+            self._beam_center_y,
             self.tilt_rotation,
             self.tilt_angle
         )
@@ -71,10 +72,36 @@ class PowderRingAnalyzer:
         self.calibration_helper = CalibrationHelper(self.geometry_calc)
         self.visualization_helper = VisualizationHelper(
             self.geometry_calc,
-            self.beam_center_x,
-            self.beam_center_y
+            self._beam_center_x,
+            self._beam_center_y
         )
         self.beam_center_finder = BeamCenterFinder()
+    
+    @property
+    def beam_center_x(self):
+        return self._beam_center_x
+    
+    @beam_center_x.setter
+    def beam_center_x(self, value):
+        self._beam_center_x = value
+        # Update relative parameters
+        if hasattr(self, 'geometry_calc'):
+            self.geometry_calc.beam_center_x = value
+        if hasattr(self, 'visualization_helper'):
+            self.visualization_helper.beam_center_x = value
+    
+    @property
+    def beam_center_y(self):
+        return self._beam_center_y
+    
+    @beam_center_y.setter
+    def beam_center_y(self, value):
+        self._beam_center_y = value
+        # Update relative parameters
+        if hasattr(self, 'geometry_calc'):
+            self.geometry_calc.beam_center_y = value
+        if hasattr(self, 'visualization_helper'):
+            self.visualization_helper.beam_center_y = value
         
     def load_image(self, file_path):
         """Load TIFF file"""
